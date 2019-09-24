@@ -1,0 +1,35 @@
+{
+    "name": "ixocreate/express-package",
+    "description": "IXOCREATE CMS Starter Package",
+    "license": "MIT",
+    "type": "library",
+    "authors": [
+        {
+            "name": "IXOCREATE",
+            "email": "opensource@ixocreate.com",
+            "homepage": "https://www.ixocreate.com",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": "^7.1",
+        "ixocreate/framework": "^0.4"
+    },
+    "require-dev": {
+        "ixocreate/coding-standard": "^2.0",
+        "ixocreate/test": "^0.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "Ixocreate\\Express\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Ixocreate\\Test\\Express\\": "tests/src/"
+        }
+    },
+    "scripts": {
+        "fix-cs": "vendor/friendsofphp/php-cs-fixer/php-cs-fixer fix --config vendor/ixocreate/coding-standard/.php_cs"
+    }
+}

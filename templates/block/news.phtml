@@ -1,0 +1,48 @@
+<?php
+$filters = [];
+if (!empty($newsCategory)) {
+    $filters = ['categoryIds' => $newsCategory,];
+}
+$news = $this->news()->locale($page->locale())->paginate(3, $filters);
+?>
+<section class="section section-margin">
+    <div class="container">
+        <?php if (!empty($title)): ?>
+            <h3 class="mb-4 text-center"><?= $title ?></h3>
+        <?php endif; ?>
+        <div class="row">
+            <?php foreach ($news as $newsItem): ?>
+                <?php
+                /** @var \Ixocreate\Cms\Entity\Page $newsPage */
+                $newsPage = $newsItem['page'];
+                $newsPageContent = $newsItem['pageContent'];
+                $categories = [];
+                foreach ($newsItem['pageNewsCategories'] as $category) {
+                    $categories[] = $category->name;
+                }
+                ?>
+                <div class="col-md mb-3">
+                    <a href="<?= $this->pageUrl()->fromPage($newsPage) ?>" class="news-box">
+                        <?php if ($newsPage->releasedAt()): ?>
+                            <div class="date"><?= $newsPage->releasedAt()->value()->format('d.m.Y') ?></div>
+                        <?php endif ?>
+                        <div class="title"><?= $newsPage->name() ?></div>
+                        <?php if (!empty((string)$newsPageContent->teaser)): ?>
+                            <p><?= $newsPageContent->teaser ?></p>
+                        <?php endif; ?>
+                        <div class="news-box-bottom">
+                            <?php if (count($categories)): ?>
+                                <div class="categories">
+                                    <?php foreach ($categories as $category): ?>
+                                        <span class="category"><?= $category ?></span>
+                                    <?php endforeach; ?>
+                                </div>
+                            <?php endif ?>
+                            <div class="link"><?= $this->trans('btn.read-more') ?> <i class="fas fa-xs fa-arrow-right"></i></div>
+                        </div>
+                    </a>
+                </div>
+            <?php endforeach; ?>
+        </div>
+    </div>
+</section>

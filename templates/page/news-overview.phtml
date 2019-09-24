@@ -1,0 +1,57 @@
+<?php $this->layout('express-layout::layout');
+
+/** @var \Ixocreate\Collection\ArrayCollection $news */
+$news = $this->news()->locale($page->locale())->findAll();
+$perPage = 999;
+
+/** @var \Ixocreate\Entity\EntityCollection $newsCategories */
+$newsCategories = $this->newsCategory()->findAll();
+$slugify = new \Cocur\Slugify\Slugify;
+$selectedNewsCategory = $newsCategories->filter(function ($newsCategory) use ($slugify, $page) {
+    return $slugify->slugify($newsCategory->name) == ($_GET['category'] ?? null) ? $newsCategory : null;
+})->first();
+$params = [
+    'category' => $_GET['category'] ?? null,
+    'year' => $_GET['year'] ?? null,
+    'page' => $_GET['page'] ?? null,
+];
+$filters = $params;
+if ($selectedNewsCategory) {
+    $filters = array_merge($filters, ['categoryIds' => [(string)$selectedNewsCategory->id]]);
+}
+$filtersActive = !empty(array_filter($params));
+$priorityFilter = array_merge($filters, ['priority' => true]);
+$priorityFilteredNews = $this->news()->locale($page->locale())->paginate($perPage, $priorityFilter);
+$noPriorityFilter = array_merge($filters, ['withoutPriority' => true]);
+$noPriorityFilteredNews = $this->news()->locale($page->locale())->paginate($perPage, $noPriorityFilter);
+?>
+
+<?php if ($newsCategories->count()): ?>
+    <div class="news-filter">
+        <div class="container">
+            <a class="btn btn-outline-primary mr-2 <?= !$selectedNewsCategory ? ' active' : '' ?>"
+               href="<?= $this->pageUrl()->fromPage($page) ?>?<?= http_build_query(array_merge($params, ['category' => null])) ?>">
+                <?= $this->trans('filter.btn.all-topics') ?>
+            </a>
+            <?php foreach ($newsCategories as $newsCategory): ?>
+                <a class="btn btn-outline-primary mr-2 <?= ($newsCategory == $selectedNewsCategory) ? ' active' : '' ?>"
+                   href="<?= $this->pageUrl()->fromPage($page) ?>?<?= http_build_query(array_merge($params, ['category' => $slugify->slugify($newsCategory->name)])) ?>">
+                    <?= $newsCategory->name ?>
+                </a>
+            <?php endforeach; ?>
+        </div>
+    </div>
+<?php endif; ?>
+
+<div class="container mt-3">
+    <?php foreach ($priorityFilteredNews as $newsItem): ?>
+        <?= $this->fetch('express-partials::news-overview-element', ['priority' => true, 'newsItem' => $newsItem]) ?>
+    <?php endforeach; ?>
+    <?php foreach ($noPriorityFilteredNews as $newsItem): ?>
+        <?= $this->fetch('express-partials::news-overview-element', ['priority' => false, 'newsItem' => $newsItem]) ?>
+    <?php endforeach; ?>
+</div>
+
+<div class="content-blocks">
+    <?= $pageContent->content ?>
+</div>

@@ -1,0 +1,14 @@
+vendor/
+.php_cs.cache
+.phpunit.result.cache
+clover.xml
+composer.phar
+composer.lock
+phpunit.xml
+
+# IDEs
+.idea
+.DS_Store
+.project
+.settings
+nbproject

@@ -1,0 +1,28 @@
+<section class="section section-margin section-slider">
+    <div class="container">
+        <div class="slider-holder">
+            <div class="slider">
+                <?php foreach ($content as $item): ?>
+                    <?php if (!empty((string)$item->link)): ?>
+                        <a href="<?= $item->link ?>" target="<?= $item->link->getTarget() ?>">
+                    <?php endif; ?>
+                    <span class="slider-item">
+              <img src="<?= $item->image->getUrl('slider') ?>" class="img-fluid">
+              <?php if (!empty((string)$item->title) || !empty((string)$item->content)): ?>
+                  <span class="slider-text">
+                  <span class="slider-title"><?= $item->title ?></span>
+                  <?php if (!empty((string)$item->content)): ?>
+                      <span class="slider-content"><?= $item->content ?></span>
+                  <?php endif; ?>
+                </span>
+              <?php endif; ?>
+            </span>
+                    <?php if (!empty((string)$item->link)): ?>
+                        </a>
+                    <?php endif; ?>
+                <?php endforeach; ?>
+            </div>
+            <button class="slick-arrow prev-arrow"><i class="fas fa-chevron-left"></i></button>
+            <button class="slick-arrow next-arrow"><i class="fas fa-chevron-right"></i></button>
+        </div>
+</section>

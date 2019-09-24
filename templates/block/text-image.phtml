@@ -1,0 +1,22 @@
+<section class="section section-margin section-text-image">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-md-6 order-first <?= ($imagePosition == 'left') ? 'order-md-last' : 'order-md-first' ?>">
+                <?php if (!empty($title)): ?>
+                    <h3 class="mb-4 text-center"><?= $title ?></h3>
+                <?php endif; ?>
+                <div class="wysiwyg-content">
+                    <?= $text ?>
+                </div>
+            </div>
+            <div class="mt-4 mt-md-0 col-md-6 order-last <?= ($imagePosition == 'left') ? 'order-md-first' : 'order-md-last' ?>">
+                <img src="<?= $image->getUrl('text-image') ?>" class="img-fluid rounded d-block mx-auto">
+                <?php if (!empty((string)$caption)): ?>
+                    <div class="text-right text-muted text-sm image-caption">
+                        <?= $caption ?>
+                    </div>
+                <?php endif; ?>
+            </div>
+        </div>
+    </div>
+</section>

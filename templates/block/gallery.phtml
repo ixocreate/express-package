@@ -1,0 +1,15 @@
+<section class="section section-margin section-gallery">
+    <div class="container">
+        <div class="img-gallery row" itemscope itemtype="http://schema.org/ImageGallery">
+            <?php foreach ($images as $image): ?>
+                <div class="col-6 col-md-4">
+                    <figure itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject" class="m-0">
+                        <a href="<?= $image->image->getUrl('gallery') ?>" itemprop="contentUrl">
+                            <img src="<?= $image->image->getUrl('gallery-thumb') ?>" itemprop="thumbnail" class="d-block mx-auto img-fluid gallery-thumb"/>
+                        </a>
+                    </figure>
+                </div>
+            <?php endforeach; ?>
+        </div>
+    </div>
+</section>

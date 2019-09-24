@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="<?= Locale::getPrimaryLanguage(\Locale::getDefault()); ?>">
+<?php
+$siteName = 'IXOCREATE';
+$twitterName = 'ixocreate';
+$defaultShareImg = $this->asset('frontend/img/share-img.png');
+?>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="application-name" content="<?= $siteName; ?>"/>
+
+    <?php if (!empty($page)): ?>
+        <title><?= $page->name(); ?> :: <?= $siteName; ?></title>
+        <meta name="description" content="<?= $pageContent->metaDescription; ?>">
+
+        <meta property="og:type" content="website"/>
+        <meta property="og:title" content="<?= $page->name(); ?>"/>
+        <meta property="og:description" content="<?= $pageContent->metaDescription; ?>"/>
+        <meta property="og:url" content="<?= $this->pageUrl()->fromPage($page); ?>"/>
+        <meta property="og:site_name" content="<?= $siteName; ?>"/>
+        <?php if ($pageContent->metaImage): ?>
+            <meta property="og:image" content="<?= $pageContent->metaImage->getUrl('social-share') ?>"/>
+        <?php else: ?>
+            <meta property="og:image" content="<?= $defaultShareImg ?>"/>
+        <?php endif; ?>
+        <meta name="twitter:card" content="summary"/>
+        <?php if ($twitterName): ?>
+            <meta name="twitter:site" content="@<?= $twitterName ?>"/>
+        <?php endif; ?>
+        <meta name="twitter:url" content="<?= $this->pageUrl()->fromPage($page); ?>"/>
+        <meta name="twitter:title" content="<?= $page->name(); ?>"/>
+        <meta name="twitter:description" content="<?= $pageContent->metaDescription; ?>"/>
+        <?php if ($pageContent->metaImage): ?>
+            <meta name="twitter:image" content="<?= $pageContent->metaImage->getUrl('social-share'); ?>"/>
+        <?php else: ?>
+            <meta name="twitter:image" content="<?= $defaultShareImg ?>"/>
+        <?php endif; ?>
+    <?php else: ?>
+        <title><?= $siteName; ?></title>
+    <?php endif; ?>
+    <link rel="apple-touch-icon-precomposed" sizes="57x57" href="<?= $this->asset('frontend/img/favicon/apple-touch-icon-57x57.png') ?>"/>
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="<?= $this->asset('frontend/img/favicon/apple-touch-icon-114x114.png') ?>"/>
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="<?= $this->asset('frontend/img/favicon/apple-touch-icon-72x72.png') ?>"/>
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="<?= $this->asset('frontend/img/favicon/apple-touch-icon-144x144.png') ?>"/>
+    <link rel="apple-touch-icon-precomposed" sizes="60x60" href="<?= $this->asset('frontend/img/favicon/apple-touch-icon-60x60.png') ?>"/>
+    <link rel="apple-touch-icon-precomposed" sizes="120x120" href="<?= $this->asset('frontend/img/favicon/apple-touch-icon-120x120.png') ?>"/>
+    <link rel="apple-touch-icon-precomposed" sizes="76x76" href="<?= $this->asset('frontend/img/favicon/apple-touch-icon-76x76.png') ?>"/>
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="<?= $this->asset('frontend/img/favicon/apple-touch-icon-152x152.png') ?>"/>
+    <link rel="icon" type="image/png" href="<?= $this->asset('frontend/img/favicon/favicon-196x196.png') ?>" sizes="196x196"/>
+    <link rel="icon" type="image/png" href="<?= $this->asset('frontend/img/favicon/favicon-96x96.png') ?>" sizes="96x96"/>
+    <link rel="icon" type="image/png" href="<?= $this->asset('frontend/img/favicon/favicon-32x32.png') ?>" sizes="32x32"/>
+    <link rel="icon" type="image/png" href="<?= $this->asset('frontend/img/favicon/favicon-16x16.png') ?>" sizes="16x16"/>
+    <link rel="icon" type="image/png" href="<?= $this->asset('frontend/img/favicon/favicon-128.png') ?>" sizes="128x128"/>
+    <meta name="msapplication-TileColor" content="#FFFFFF"/>
+    <meta name="msapplication-TileImage" content="<?= $this->asset('frontend/img/favicon/mstile-144x144.png') ?>"/>
+    <meta name="msapplication-square70x70logo" content="<?= $this->asset('frontend/img/favicon/mstile-70x70.png') ?>"/>
+    <meta name="msapplication-square150x150logo" content="<?= $this->asset('frontend/img/favicon/mstile-150x150.png') ?>"/>
+    <meta name="msapplication-wide310x150logo" content="<?= $this->asset('frontend/img/favicon/mstile-310x150.png') ?>"/>
+    <meta name="msapplication-square310x310logo" content="<?= $this->asset('frontend/img/favicon/mstile-310x310.png') ?>"/>
+    <link rel="stylesheet" href="<?= $this->asset('frontend/css/vendor.min.css'); ?>" type="text/css">
+    <link rel="stylesheet" href="<?= $this->asset('frontend/css/main.min.css'); ?>" type="text/css">
+    <link rel="stylesheet" href="https://ixocreate.github.io/current/css/vendor.min.css">
+    <link rel="stylesheet" href="https://ixocreate.github.io/current/css/main.min.css">
+</head>
+
+<body class="page-footer-bottom">
+
+<header class="page-header">
+    <?= $this->fetch('express-partials::main-menu') ?>
+</header>
+
+<main class="page-content">
+    <?= $this->section('content'); ?>
+</main>
+
+<footer class="page-footer">
+    <div class="container">
+        <div class="footer-content">
+            <div class="row">
+                <div class="col-md text-muted">
+                    &copy; <?= date('Y') ?> <?= $siteName ?>
+                </div>
+                <div class="col-md text-left text-md-right">
+                    <?= $this->fetch('express-partials::meta-menu') ?>
+                </div>
+            </div>
+            <div class="create-info">
+                produced by
+                <a href="//www.ixolit.com" target="_blank">IXOLIT</a> /
+                <a href="//www.ixocreate.com/" target="_blank">IXOCREATE</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="pswp__bg"></div>
+    <div class="pswp__scroll-wrap">
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)"></button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="<?= $this->asset('frontend/js/vendor.min.js'); ?>" type="text/javascript"></script>
+<script src="<?= $this->asset('frontend/js/main.min.js'); ?>" type="text/javascript"></script>
+
+</body>
+</html>
+

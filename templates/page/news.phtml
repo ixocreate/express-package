@@ -1,0 +1,35 @@
+<?php $this->layout('express-layout::layout') ?>
+<?php
+/** @var \Ixocreate\Cms\Entity\Page $page */
+/** @var \Ixocreate\Schema\Type\SchemaType $pageContent */
+/** @var \Ixocreate\Entity\EntityCollection $newsCategories */
+$newsCategories = $this->newsCategory()->findByPageId($page->id());
+
+$categories = [];
+foreach ($newsCategories as $category) {
+    $categories[] = $category->name;
+}
+?>
+<div class="news-header">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <?php if ($page->releasedAt()): ?>
+                    <div class="date"><?= $page->releasedAt()->value()->format('d.m.Y') ?></div>
+                <?php endif; ?>
+            </div>
+            <div class="col text-right text-muted">
+                <?php if (count($categories)): ?>
+                    <div class="categories">
+                        <?php foreach ($categories as $category): ?>
+                            <span class="category"><?= $category ?></span>
+                        <?php endforeach; ?>
+                    </div>
+                <?php endif ?>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="content-blocks">
+    <?= $pageContent->content ?>
+</div>

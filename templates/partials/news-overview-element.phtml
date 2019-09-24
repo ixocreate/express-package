@@ -1,0 +1,33 @@
+<?php
+$newsPage = $newsItem['page'];
+$newsPageContent = $newsItem['pageContent'];
+$categories = [];
+foreach ($newsItem['pageNewsCategories'] as $category) {
+    $categories[] = $category->name;
+}
+?>
+<a href="<?= $this->pageUrl()->fromPage($newsPage) ?>" class="news-overview-box <?= $priority ? 'priority' : '' ?>">
+    <?php if (!empty($newsPage->releasedAt)): ?>
+        <div class="date"><?= $newsPage->releasedAt->value()->format('d.m.Y') ?></div>
+    <?php endif ?>
+    <h5 class="title font-weight-medium my-2"><?= $newsPage->name ?></h5>
+    <?php if (!empty((string)$newsPageContent->teaser)): ?>
+        <p><?= $newsPageContent->teaser ?></p>
+    <?php endif; ?>
+    <div class="row">
+        <div class="col-md-6">
+            <?php if (count($categories)): ?>
+                <div class="categories">
+                    <?php foreach ($categories as $category): ?>
+                        <span class="category"><?= $category ?></span>
+                    <?php endforeach; ?>
+                </div>
+            <?php endif ?>
+        </div>
+        <div class="col-md-6 text-right">
+            <div>
+                <?= $this->trans('btn.read-more') ?> <i class="fas fa-xs fa-arrow-right"></i>
+            </div>
+        </div>
+    </div>
+</a>

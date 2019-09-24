@@ -1,0 +1,128 @@
+<section class="section section-margin section-contact-form">
+    <div class="container">
+        <div class="contact-form">
+            <form method="post" action="/api/contact" class="pando-ajax-form" data-validation="<?= htmlentities(json_encode([
+                'gender' => 'required',
+                'firstName' => 'required',
+                'lastName' => 'required',
+                'email' => [
+                    'required' => true,
+                    'email' => true,
+                ],
+                'message' => 'required',
+                'privacy' => 'required',
+            ])); ?>">
+                <div class="alert alert-danger form-show-error">
+                    <h4><?= $this->trans('form.error.title') ?></h4>
+                    <p class="mb-0"><?= $this->trans('form.error.text') ?></p>
+                </div>
+                <div class="alert alert-success form-show-success">
+                    <h4><?= $this->trans('form.success.title') ?></h4>
+                    <p class="mb-0"><?= $this->trans('form.success.text') ?></p>
+                </div>
+                <div class="form-hide-success">
+                    <div class="form-group">
+                        <div class="form-check">
+                            <label class="form-check-label mb-2">
+                                <input class="form-check-input" type="radio" name="gender" value="m" checked>
+                                <?= $this->trans('form.label.gender.male') ?>
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <label class="form-check-label">
+                                <input class="form-check-input" type="radio" name="gender" value="f">
+                                <?= $this->trans('form.label.gender.female') ?>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md">
+                            <div class="form-group">
+                                <label><?= $this->trans('form.label.first-name') ?><b class="text-danger">*</b></label>
+                                <input type="text" name="firstName" class="form-control" placeholder="<?= $this->trans('form.label.first-name') ?>">
+                            </div>
+                            <div class="form-group">
+                                <label><?= $this->trans('form.label.last-name') ?><b class="text-danger">*</b></label>
+                                <input type="text" name="lastName" class="form-control" placeholder="<?= $this->trans('form.label.last-name') ?>">
+                            </div>
+                            <div class="form-group">
+                                <label><?= $this->trans('form.label.email') ?><b class="text-danger">*</b></label>
+                                <input type="text" name="email" class="form-control" placeholder="<?= $this->trans('form.label.email') ?>">
+                            </div>
+                        </div>
+                        <div class="col-md">
+                            <div class="row">
+                                <div class="col-8">
+                                    <div class="form-group">
+                                        <label><?= $this->trans('form.label.street') ?></label>
+                                        <input type="text" name="street" class="form-control" placeholder="<?= $this->trans('form.label.street') ?>">
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="form-group">
+                                        <label><?= $this->trans('form.label.street-nr') ?></label>
+                                        <input type="text" name="streetNumber" class="form-control" placeholder="<?= $this->trans('form.label.street-nr') ?>.">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-4">
+                                    <div class="form-group">
+                                        <label><?= $this->trans('form.label.zip') ?></label>
+                                        <input type="text" name="zip" class="form-control" placeholder="<?= $this->trans('form.label.zip') ?>">
+                                    </div>
+                                </div>
+                                <div class="col-8">
+                                    <div class="form-group">
+                                        <label><?= $this->trans('form.label.city') ?></label>
+                                        <input type="text" name="city" class="form-control" placeholder="<?= $this->trans('form.label.city') ?>">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label><?= $this->trans('form.label.country') ?></label>
+                                <input type="text" name="country" class="form-control" placeholder="<?= $this->trans('form.label.country') ?>">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md">
+                            <div class="form-group">
+                                <label><?= $this->trans('form.label.phone') ?></label>
+                                <input type="text" name="phone" class="form-control" placeholder="<?= $this->trans('form.label.phone') ?>">
+                            </div>
+                        </div>
+                        <div class="col-md">
+                            <div class="form-group">
+                                <label><?= $this->trans('form.label.fax') ?></label>
+                                <input type="text" name="fax" class="form-control" placeholder="<?= $this->trans('form.label.fax') ?>">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md">
+                            <div class="form-group">
+                                <label><?= $this->trans('form.label.message') ?>*</label>
+                                <textarea type="text" name="message" rows="6" class="form-control" placeholder="<?= $this->trans('form.label.message') ?>"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group form-check">
+                        <label class="form-check-label">
+                            <input type="checkbox" class="form-check-input" name="privacy">
+                            <?= $this->trans('form.label.privacy') ?><b class="text-danger">*</b>
+                        </label>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-8">
+                            <b class="text-danger">*</b> <?= $this->trans('form.required-field') ?>
+                        </div>
+                        <div class="col-md text-right">
+                            <button type="submit" class="btn btn-primary"><?= $this->trans('form.btn.send') ?></button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,32 @@
+<section class="section section-margin section-cookie-info">
+    <div class="container">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th scope="col"><?= $this->trans('cookie-info.header.name') ?></th>
+                <th scope="col"><?= $this->trans('cookie-info.header.duration') ?></th>
+                <th scope="col"><?= $this->trans('cookie-info.header.description') ?></th>
+                <th scope="col"><?= $this->trans('cookie-info.header.source') ?></th>
+            </tr>
+            </thead>
+            <tbody>
+            <?php foreach ($table as $row): ?>
+                <tr>
+                    <td><?= $row->name ?></td>
+                    <td><?= $row->time ?></td>
+                    <td><?= $row->description ?></td>
+                    <td><?= $row->source ?></td>
+                </tr>
+            <?php endforeach; ?>
+            </tbody>
+        </table>
+    </div>
+</section>
+
+
+
+
+
+
+
+

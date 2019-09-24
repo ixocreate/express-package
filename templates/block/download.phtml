@@ -1,0 +1,46 @@
+<section class="section section-margin section-download">
+    <div class="container">
+        <?php if (!empty((string)$title)): ?>
+            <h3 class="mb-4 text-center"><?= $title ?></h3>
+        <?php endif; ?>
+        <div class="download-list">
+            <?php foreach ($downloads as $download): ?>
+                <a href="<?= $download->media->getUrl() ?>" target="_blank" class="download-link">
+                    <div class="link-box-content">
+                        <div class="row align-items-center">
+                            <div class="col-2">
+                                <?php
+                                $extension = pathinfo((string)$download->media->getUrl())['extension'];
+                                switch ($extension) {
+                                    case 'jpg':
+                                    case 'jpeg':
+                                    case 'bmp':
+                                    case 'gif':
+                                    case 'png':
+                                        $icon = 'file-image';
+                                        break;
+                                    case 'pdf':
+                                        $icon = 'file-pdf';
+                                        break;
+                                    default:
+                                        $icon = 'file';
+                                        break;
+                                }
+                                ?>
+                                <div class="download-icon text-center">
+                                    <i class="far fa-<?= $icon ?>"></i>
+                                </div>
+                            </div>
+                            <div class="col-10">
+                                <div class="title font-weight-bold mt-0"><?= $download->title ?></div>
+                                <?php if (!empty((string)$download->text)): ?>
+                                    <div><?= $download->text ?></div>
+                                <?php endif; ?>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            <?php endforeach; ?>
+        </div>
+    </div>
+</section>

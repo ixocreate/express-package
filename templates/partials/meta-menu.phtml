@@ -1,0 +1,21 @@
+<ul class="footer-links">
+    <?php foreach ($this->nav()->asFlat()->withNavigation('meta') as $item): ?>
+        <li>
+            <a href="<?= $this->pageUrl()->fromPage($item->page()) ?>"><?= $item->page()->name() ?></a>
+        </li>
+    <?php endforeach; ?>
+    <?php if (!empty($sitemap)): ?>
+        <?php foreach (['en_US', 'de_AT'] as $localeIteration): ?>
+            <?php if (\Locale::getDefault() != $localeIteration): ?>
+                <li>
+                    <a href="<?= $this->pageUrl()->switchLanguage($sitemap, $localeIteration, 'home') ?>">
+                        <?php
+                        $langKey = \Locale::getPrimaryLanguage($localeIteration);
+                        ?>
+                        <?= \Locale::getDisplayName($langKey, $langKey) ?>
+                    </a>
+                </li>
+            <?php endif; ?>
+        <?php endforeach; ?>
+    <?php endif; ?>
+</ul>

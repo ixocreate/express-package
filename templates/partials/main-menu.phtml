@@ -1,0 +1,52 @@
+<?php
+$navigation = null;
+$productNavigation = null;
+$navigationKey = 'main';
+$minLevel = 1;
+$maxLevel = 2;
+/** @var Ixocreate\Cms\Navigation\Container $navigation */
+$navigation = $this->nav(\Locale::getDefault())
+    ->withMinimumLevel($minLevel)
+    ->withMaximumLevel($maxLevel)
+    ->withNavigation($navigationKey);
+if (isset($page)) {
+    $navigation = $navigation->withActiveState($page);
+}
+?>
+<nav class="navbar navbar-expand-lg navbar-light main-navbar fixed-top">
+    <div class="container align-items-center align-items-lg-end">
+        <a class="navbar-brand" href="<?= $this->pageUrl()->fromHandle('home') ?>">
+            <img src="<?= $this->asset('frontend/img/logo.svg'); ?>" class="nav-logo"/>
+        </a>
+        <div class="text-right">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-nav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        </div>
+        <div id="main-nav" class="navbar-collapse collapse">
+            <ul class="navbar-nav ml-auto">
+                <?php
+                /** @var \Ixocreate\Cms\Navigation\Item $item */
+                foreach ($navigation as $item): ?>
+                    <li class="nav-item<?= $item->isActive() ? " active" : "" ?><?= $item->hasChildren() ? " dropdown" : "" ?>">
+                        <?php if (!$item->hasChildren()): ?>
+                            <a class="nav-link"
+                               href="<?= $this->pageUrl()->fromPage($item->page()) ?>"><?= $item->page()->name() ?></a>
+                        <?php else: ?>
+                            <a class="nav-link" href="#" id="navbarDropdown" role="button"
+                               data-toggle="dropdown"><?= $item->page()->name() ?> <?= $item->hasChildren() ? '<i class="fas fa-chevron-down arrow"></i>' : '' ?></a>
+                            <div class="dropdown-menu dropdown-menu-right">
+                                <?php /** @var \Ixocreate\Cms\Navigation\Item $subItem */
+                                foreach ($item->children() as $subItem): ?>
+                                    <a class="dropdown-item<?= $subItem->isActive() ? " active" : "" ?>"
+                                       href="<?= $this->pageUrl()->fromPage($subItem->page()) ?>"><?= $subItem->page()->name() ?></a>
+                                <?php endforeach; ?>
+                            </div>
+                        <?php endif; ?>
+                    </li>
+                <?php endforeach; ?>
+
+            </ul>
+        </div>
+    </div>
+</nav>

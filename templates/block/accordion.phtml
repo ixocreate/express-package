@@ -1,0 +1,23 @@
+<?php $uuid = uniqid(); ?>
+<section class="section section-margin section-accordion">
+    <div class="container">
+        <?php if (!empty((string)$title)): ?>
+            <h3 class="mb-4 text-center"><?= $title ?></h3>
+        <?php endif; ?>
+        <div class="accordion" id="accordion-<?= $uuid ?>">
+            <?php foreach ($accordion as $key => $element): ?>
+                <div class="accordion-item">
+                    <div class="accordion-header collapsed" data-toggle="collapse" data-target="#accordion-<?= $uuid ?>-<?= $key ?>">
+                        <?= $element->title ?>
+                        <i class="accordion-icon fas fa-chevron-left"></i>
+                    </div>
+                    <div id="accordion-<?= $uuid ?>-<?= $key ?>" class="accordion-content collapse" data-parent="#accordion-<?= $uuid ?>">
+                        <div class="accordion-content-inner">
+                            <?= $element->text ?>
+                        </div>
+                    </div>
+                </div>
+            <?php endforeach; ?>
+        </div>
+    </div>
+</section>

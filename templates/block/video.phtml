@@ -1,0 +1,22 @@
+<section class="section section-margin section-youtube">
+    <div class="container text-center">
+        <?php if (!empty((string)$title)): ?>
+            <h3 class="mb-0"><?= $title ?></h3>
+        <?php endif; ?>
+        <?php if (!empty((string)$subTitle)): ?>
+            <p class="mb-3"><?= $subTitle ?></p>
+        <?php endif; ?>
+        <div class="content-video">
+            <div class="embed-responsive embed-responsive-16by9 youtube-video-link" data-video-id="<?= $video ?>">
+                <?php
+                $imageUrl = 'https://img.youtube.com/vi/' . $video . '/sddefault.jpg';
+                if ($image) {
+                    $imageUrl = $image->getUrl('video');
+                }
+                ?>
+                <div class="preview-img rounded" style="background-image: url('<?= $imageUrl ?>');"></div>
+                <img class="play-btn" src="<?= $this->asset('frontend/img/icon-play.svg') ?>"/>
+            </div>
+        </div>
+    </div>
+</section>

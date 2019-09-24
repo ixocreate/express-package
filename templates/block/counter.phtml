@@ -1,0 +1,16 @@
+<section class="section section-margin section-counter">
+    <div class="container">
+        <div class="row text-center">
+            <?php foreach ($counters as $counter): ?>
+                <div class="col-md">
+                    <div class="counter">
+                        <img src="<?= $counter->icon->getUrl('icon') ?>" class="img-fluid mb-2">
+                        <h3 class="counter-number mb-1" data-to="<?= $counter->number ?>" data-speed="1500">0</h3>
+                        <?php if (!empty((string)$counter->text)): ?>
+                            <p><?= $counter->text ?></p>
+                        <?php endif; ?>
+                    </div>
+                </div>
+            <?php endforeach; ?>
+        </div>
+</section>
